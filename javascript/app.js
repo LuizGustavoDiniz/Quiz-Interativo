@@ -1,9 +1,11 @@
+/* pega a refêrencia dos elementos do html */
 const form = document.querySelector('.quiz-form')
 const scoreContainer = document.querySelector('.score-container')
+/* cria uma div */
 const div = document.createElement('div')
 
+/* 2 arrays, 1 com o total de respostas certas, e o 2 com as referencias de cada input no form */
 const correctAnswers = ['Right', 'Right', 'Right', 'Right', 'Right', 'Right']
-
 const userAnswers = [
   form.Question1,
   form.Question2,
@@ -13,6 +15,7 @@ const userAnswers = [
   form.Question6
 ]
 
+/* Verifica se o score baixo ou alto e mostra uma mensagem referente */
 const ScoreConcept = score => {
 const concept =
 score < 75
@@ -22,6 +25,8 @@ score < 75
   return concept
 }
 
+/* insere na Div criada no topo do código 2 paragrafos com informações e
+cria um button e tbm insere na div*/
 const insertScoreDivIntoDom = score => {
   scoreContainer.classList.add('show')
   div.setAttribute('class', 'score')
@@ -39,11 +44,12 @@ const insertScoreDivIntoDom = score => {
   scoreContainer.appendChild(div)
 }
 
-
+/* evento de submit no form primeiro ele verifica se o valor do radio checado é 
+igual a um dos itens do array se for coloca 25 na let score correctAnswers e 
+depois chama a função que cria elementos html passando o score como argumento */
 
 form.addEventListener('submit', event => {
   event.preventDefault()
-
   let score = 0
 
   userAnswers.forEach((answer, index) => {
@@ -52,12 +58,14 @@ form.addEventListener('submit', event => {
     }
   })
 
-
   insertScoreDivIntoDom(score)
 })
 
+/* uma funçao para remover classe de um elemento */
 const removeClass = () => scoreContainer.classList.remove('show')
 
+/* faz verificaçoes para retirar a classe que mostra a tela de score
+caso os elementos verificados forem clicados */
 scoreContainer.addEventListener('click', event => {
   const elementClassName = event.target.className
 
